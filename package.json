@@ -1,5 +1,5 @@
 {
-  "name": "ng2-flatpickr",
+  "name": "@kelvin/flatpickr",
   "version": "1.5.1",
   "description": "Angular 2+ wrapper for flatpickr",
   "main": "index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mezoistvan/ng2-flatpickr.git"
+    "url": "git+https://github.com/manar-mk/ng2-flatpickr.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mezoistvan/ng2-flatpickr/issues"
+    "url": "https://github.com/manar-mk/ng2-flatpickr/issues"
   },
-  "homepage": "https://github.com/mezoistvan/ng2-flatpickr#readme",
+  "homepage": "https://github.com/manar-mk/ng2-flatpickr#readme",
   "dependencies": {
     "@angular/common": "^5.0.0",
     "flatpickr": "^4.0.6"
@@ -34,5 +34,8 @@
     "lib": {
       "entryFile": "public_api.ts"
     }
+  },
+  "publishConfig": {
+    "registry": "http://nexus.strongte.am:8081/repository/npm-private/"
   }
 }

@@ -4,12 +4,12 @@ import { FlatpickrOptions } from './flatpickr-options.interface';
 
 declare var require: any;
 
-if(typeof window !== 'undefined'){
-    require( 'flatpickr' );
+if (typeof window !== 'undefined') {
+	require('flatpickr');
 }
 
 @Component({
-	selector: 'ng2-flatpickr', 
+	selector: 'ng2-flatpickr',
 	template: `
 		<div class="ng2-flatpickr-input-container" #flatpickr>
 			<input class="ng2-flatpickr-input" [placeholder]="placeholder" type="text" data-input>
@@ -17,7 +17,7 @@ if(typeof window !== 'undefined'){
 	providers: [
 		{
 			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef( () => Ng2FlatpickrComponent ),
+			useExisting: forwardRef(() => Ng2FlatpickrComponent),
 			multi: true
 		}
 	]
@@ -29,7 +29,7 @@ export class Ng2FlatpickrComponent implements AfterViewInit, ControlValueAccesso
 	private defaultFlatpickrOptions: FlatpickrOptions = {
 		wrap: true,
 		clickOpens: true,
-		onChange: ( selectedDates: any ) => { this.writeValue( selectedDates ); }
+		onChange: (selectedDates: any) => { this.writeValue(selectedDates); }
 	};
 
 	@ViewChild('flatpickr')
@@ -46,37 +46,39 @@ export class Ng2FlatpickrComponent implements AfterViewInit, ControlValueAccesso
 
 	///////////////////////////////////
 
-	writeValue( value:any ) {
-		this.propagateChange( value );
+	writeValue(value: any) {
+		this.propagateChange(value);
 	}
 
-	registerOnChange( fn: any ) {
+	registerOnChange(fn: any) {
 		this.propagateChange = fn;
 	}
 
-	registerOnTouched() {}
+	registerOnTouched() { }
 
-	propagateChange = ( _: any ) => {};
+	propagateChange = (_: any) => { };
 
 	///////////////////////////////////
 
-	setDateFromInput( date: any ) {
-		this.flatpickrElement.nativeElement._flatpickr.setDate( date, true );
+	setDateFromInput(date: any) {
+		if (this.flatpickrElement.nativeElement._flatpickr) {
+			this.flatpickrElement.nativeElement._flatpickr.setDate(date, true);
+		}
 	}
 
 	ngAfterViewInit() {
-		if( this.config ) {
-			Object.assign( this.defaultFlatpickrOptions, this.config );
+		if (this.config) {
+			Object.assign(this.defaultFlatpickrOptions, this.config);
 		}
-		this.flatpickr = this.flatpickrElement.nativeElement.flatpickr( this.defaultFlatpickrOptions );
-		if( this.setDate ) {
-			this.setDateFromInput( this.setDate );
+		this.flatpickr = this.flatpickrElement.nativeElement.flatpickr(this.defaultFlatpickrOptions);
+		if (this.setDate) {
+			this.setDateFromInput(this.setDate);
 		}
 	}
 
-	ngOnChanges( changes: SimpleChanges ) {
-		if( changes.hasOwnProperty( 'setDate' ) && changes[ 'setDate' ].currentValue ) {
-			this.setDateFromInput( changes[ 'setDate' ].currentValue );
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes.hasOwnProperty('setDate') && changes['setDate'].currentValue) {
+			this.setDateFromInput(changes['setDate'].currentValue);
 		}
 	}
 
